@@ -26,19 +26,21 @@ class PostRepository
             ->paginate($perPage);
     }
 
-    public function getByUser(int $userId, int $perPage = 15): LengthAwarePaginator
+    public function getByUser(int $userId, int $perPage = 15, array $with = []): LengthAwarePaginator
     {
         return Post::where('user_id', $userId)
+            ->with($with)
             ->withCount('comments')
             ->latest('published_at')
             ->paginate($perPage);
     }
 
-    public function getByCategory(int $categoryId, int $perPage = 15): LengthAwarePaginator
+    public function getByCategory(int $categoryId, int $perPage = 15, array $with = []): LengthAwarePaginator
     {
         return Post::whereHas('categories', function ($query) use ($categoryId) {
             $query->where('categories.id', $categoryId);
         })
+            ->with($with)
             ->withCount('comments')
             ->latest('published_at')
             ->paginate($perPage);
