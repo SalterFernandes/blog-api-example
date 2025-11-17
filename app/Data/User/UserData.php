@@ -24,13 +24,13 @@ class UserData extends Data
 
         #[WithCast(DateTimeInterfaceCast::class, format: 'Y-m-d H:i:s')]
         #[MapName('created_at')]
-        public Carbon $createdAt,
+        public Carbon                   $createdAt,
 
         #[WithCast(DateTimeInterfaceCast::class, format: 'Y-m-d H:i:s')]
         #[MapName('updated_at')]
-        public Carbon $updatedAt,
+        public Carbon                   $updatedAt,
 
         /** @var Lazy|DataCollection<PostData> */
-        public Lazy|DataCollection $posts,
+        public Lazy|DataCollection|null $posts = null,
     ) {}
 }
