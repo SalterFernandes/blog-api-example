@@ -37,11 +37,11 @@ class PostData extends Data
         public Lazy|UserData $author,
 
         /** @var Lazy|DataCollection<CommentData> */
-        public Lazy|DataCollection $comments,
+        public Lazy|DataCollection|null $comments = null,
 
         /** @var Lazy|DataCollection<CategoryData> */
-        public Lazy|DataCollection $categories,
+        public Lazy|DataCollection|null $categories = null,
 
-        public Lazy|int $commentsCount,
+        public Lazy|int $commentsCount = 0,
     ) {}
 }
