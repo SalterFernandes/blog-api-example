@@ -13,14 +13,12 @@ readonly class CommentService
         private CommentRepository $commentRepository
     ) {}
 
-    public function getByPost(int $postId, int $perPage = 15): \Illuminate\Pagination\AbstractPaginator|\Illuminate\Pagination\LengthAwarePaginator
+    public function getByPost(int $postId, int $perPage = 15): PaginatedDataCollection
     {
         $comments = $this->commentRepository->getByPost($postId, $perPage);
 
-        //return CommentData::collection($comments)->include('author');
-        return $comments->through(
-            fn($comment) => CommentData::from($comment)->include('author')
-        );
+        return CommentData::collect($comments, PaginatedDataCollection::class)
+            ->include('author');
     }
 
     public function create(CreateCommentData $data, int $userId): CommentData

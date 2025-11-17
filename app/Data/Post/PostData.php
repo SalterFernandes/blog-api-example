@@ -7,6 +7,7 @@ use Spatie\LaravelData\Lazy;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Attributes\Computed;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use App\Data\User\UserData;
 use App\Data\Comment\CommentData;
@@ -42,6 +43,7 @@ class PostData extends Data
         /** @var Lazy|DataCollection<CategoryData> */
         public Lazy|DataCollection|null $categories = null,
 
-        public Lazy|int $commentsCount = 0,
+        #[Computed]
+        public int $commentsCount = 0,
     ) {}
 }

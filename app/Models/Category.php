@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -30,5 +31,12 @@ class Category extends Model
     public function posts(): BelongsToMany
     {
         return $this->belongsToMany(Post::class, 'category_post');
+    }
+
+    protected function postsCount(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->posts()->count(),
+        );
     }
 }
