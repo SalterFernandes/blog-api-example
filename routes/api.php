@@ -23,6 +23,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/categories/{id}', [CategoryController::class, 'show']);
 
+    // Comments (#Public)
+    Route::get('/posts/{postId}/comments', [CommentController::class, 'index']);
 
 });
 
@@ -41,4 +43,8 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function (){
     // Categories
     Route::post('/categories', [CategoryController::class, 'store']);
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
+
+    // Comments
+    Route::post('/comments', [CommentController::class, 'store']);
+    Route::delete('/comments/{id}', [CommentController::class, 'destroy']);
 });
